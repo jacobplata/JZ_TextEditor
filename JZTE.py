@@ -19,16 +19,35 @@ def save():
 def openfile():
     f = open('Readme.txt', 'r')
     text1.insert(END, f.read())
-    f.close
-    print
+    f.close()
 
+def justcenter():
+    text1.tag_configure("center", justify='center')
+    text1.tag_add("center", 1.0, "end")
+    
+def justleft():
+    text1.tag_configure("left", justify='left')
+    text1.tag_add("left", 1.0, "end")
+    
+def justright():
+    text1.tag_configure("right", justify='right')
+    text1.tag_add("right", 1.0, "end")
+
+def makeitalic():
+    text1.tag_configure("italic", font = ('Sans','10','italic'))
+    text1.tag_add("italic", 1.0, "end")
+
+    
 def makebold():
-    text1.tag_config
-    font = tkFont.Font(weight='bold')
-
-
-
-
+    text1.tag_configure("bold", font = ('Sans','10','bold'))
+    text1.tag_add("bold", 1.0, "end")
+    
+def makeunderline():
+    text1.tag_configure("underline", font = ('Sans','10','underline'))
+    text1.tag_add("underline", 1.0, "end")
+    
+    
+    
 root = Tk()
 root.title("Low Key Text Editor")
 
@@ -65,7 +84,7 @@ image = Image.open("italic.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-italicbutton = Button(root, text="I", image=photo, command=nothing)
+italicbutton = Button(root, text="I", image=photo, command=makeitalic)
 italicbutton.image = photo
 italicbutton.grid(row=0, column=1, sticky=EW)
 
@@ -73,7 +92,7 @@ image = Image.open("underline.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-underlinebutton = Button(root, text="U", image=photo, command=nothing)
+underlinebutton = Button(root, text="U", image=photo, command=makeunderline)
 underlinebutton.image = photo
 underlinebutton.grid(row=0, column=2, sticky=EW)
 
@@ -81,7 +100,7 @@ image = Image.open("left.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-leftbutton = Button(root, text="U", image=photo, command=nothing)
+leftbutton = Button(root, text="U", image=photo, command=justleft)
 leftbutton.image = photo
 leftbutton.grid(row=0, column=3, sticky=EW)
 
@@ -89,7 +108,7 @@ image = Image.open("center.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-centerbutton = Button(root, text="U", image=photo, command=nothing)
+centerbutton = Button(root, text="U", image=photo, command=justcenter)
 centerbutton.image = photo
 centerbutton.grid(row=0, column=4, sticky=EW)
 
@@ -97,7 +116,7 @@ image = Image.open("right.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-rightbutton = Button(root, text="U", image=photo, command=r)
+rightbutton = Button(root, text="U", image=photo, command=justright)
 rightbutton.image = photo
 rightbutton.grid(row=0, column=5, sticky=EW)
 
@@ -110,9 +129,8 @@ fontbutton.image = photo
 fontbutton.grid(row=0, column=6, sticky=EW)
 
 
-#Text
+#Text)
 text1 = Text(root, height=50, width=100)
-text1.font(font="times", fg="red")
 text1.grid(row=1, column=0, rowspan=10, columnspan=10, sticky=EW)
 
 
