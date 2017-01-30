@@ -22,30 +22,43 @@ def openfile():
     f.close()
 
 def justcenter():
+    deletealltags()
     text1.tag_configure("center", justify='center')
     text1.tag_add("center", 1.0, "end")
     
 def justleft():
+    deletealltags()
     text1.tag_configure("left", justify='left')
     text1.tag_add("left", 1.0, "end")
     
 def justright():
+    deletealltags()
     text1.tag_configure("right", justify='right')
     text1.tag_add("right", 1.0, "end")
 
 def makeitalic():
+    deletealltags()
     text1.tag_configure("italic", font = ('Sans','10','italic'))
     text1.tag_add("italic", 1.0, "end")
 
     
 def makebold():
+    deletealltags()
     text1.tag_configure("bold", font = ('Sans','10','bold'))
     text1.tag_add("bold", 1.0, "end")
     
 def makeunderline():
+    deletealltags()
     text1.tag_configure("underline", font = ('Sans','10','underline'))
     text1.tag_add("underline", 1.0, "end")
-    
+
+def deletealltags():
+    text1.tag_delete("underline", 1.0, "end")
+    text1.tag_delete("bold", 1.0, "end")
+    text1.tag_delete("italic", 1.0, "end")
+    text1.tag_delete("right", 1.0, "end")
+    text1.tag_delete("left", 1.0, "end")
+    text1.tag_delete("center", 1.0, "end")
     
     
 root = Tk()
