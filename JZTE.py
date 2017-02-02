@@ -10,14 +10,31 @@ def nothing():
 def r():
     print "r"
 
-def save():
-    f = open('Readme.txt', 'w')
+def saveall():
+    savetext()
+    save_tags()
+    
+def savetext():
+    f = open('savedtext.docx', 'w')
     t = text1.get(1.0,END)
     f.write(t)
     f.close()
-
+    
+def save_tags():
+    f = open('tags.docx', 'w')
+    t = text1.tag_cget("underline", 1.0, "end")
+    text1.tag_cget("bold", 1.0, "end")
+    text1.tag_cget("italic", 1.0, "end")
+    text1.tag_cget("right", 1.0, "end")
+    text1.tag_cget("left", 1.0, "end")
+    text1.tag_cget("center", 1.0, "end")
+    text1.tag_cget("red", 1.0, "end")
+    f.write(t)
+    f.close()
+    
+    
 def openfile():
-    f = open('Readme.txt', 'r')
+    f = open('savedtext.docx', 'r')
     text1.insert(END, f.read())
     f.close()
 
@@ -40,7 +57,6 @@ def makeitalic():
     deletealltags()
     text1.tag_configure("italic", font = ('Sans','10','italic'))
     text1.tag_add("italic", 1.0, "end")
-
     
 def makebold():
     deletealltags()
@@ -52,6 +68,11 @@ def makeunderline():
     text1.tag_configure("underline", font = ('Sans','10','underline'))
     text1.tag_add("underline", 1.0, "end")
 
+def makered():
+    deletealltags()
+    text1.tag_configure("red", foreground="red")
+    text1.tag_add("red", 1.0, "end")
+
 def deletealltags():
     text1.tag_delete("underline", 1.0, "end")
     text1.tag_delete("bold", 1.0, "end")
@@ -59,7 +80,20 @@ def deletealltags():
     text1.tag_delete("right", 1.0, "end")
     text1.tag_delete("left", 1.0, "end")
     text1.tag_delete("center", 1.0, "end")
+    text1.tag_delete("red", 1.0, "end")
+  
+def savetags_cget():
+    text1.tag_cget("underline", 1.0, "end")
+    text1.tag_cget("bold", 1.0, "end")
+    text1.tag_cget("italic", 1.0, "end")
+    text1.tag_cget("right", 1.0, "end")
+    text1.tag_cget("left", 1.0, "end")
+    text1.tag_cget("center", 1.0, "end")
+    text1.tag_cget("red", 1.0, "end")
+  
     
+      
+          
     
 root = Tk()
 root.title("Low Key Text Editor")
@@ -70,7 +104,7 @@ menubar = Menu(root)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="Open", command=openfile)
 filemenu.add_separator()
-filemenu.add_command(label="Save", command=save)
+filemenu.add_command(label="Save", command=savetext)
 
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
@@ -137,12 +171,12 @@ image = Image.open("font.png")
 image = image.resize((25,25,))
 photo = ImageTk.PhotoImage(image)
 
-fontbutton = Button(root, text="U", image=photo, command=nothing)
+fontbutton = Button(root, text="U", image=photo, command=makered)
 fontbutton.image = photo
 fontbutton.grid(row=0, column=6, sticky=EW)
 
 
-#Text)
+#Text
 text1 = Text(root, height=50, width=100)
 text1.grid(row=1, column=0, rowspan=10, columnspan=10, sticky=EW)
 
